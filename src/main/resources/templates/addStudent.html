@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/test.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <title>ACE Inspiration</title>
+
+
+</head>
+
+<body>
+    <div th:replace="header :: header"></div>
+
+    <div class="container">
+        <div th:replace="sidebar :: sidebar"></div>
+
+        <div class="main_contents">
+            <div id="sub_content">
+                
+
+                <form th:action="@{/createStudent}" method="post" th:object="${sar}">
+                    <h2 class="col-md-6 offset-md-2 mb-5 mt-4">Student Registration</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-2"></div>
+                        <label for="studentId" class="col-md-2 col-form-label">StudentId</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" th:field="*{studentId}" id="studentId"
+                                placeholder="STU000" />
+                            <p class="error" th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-2"></div>
+                        <label for="name" class="col-md-2 col-form-label">Name</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder=" Derek" />
+                            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-2"></div>
+                        <label for="dob" class="col-md-2 col-form-label">DOB</label>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" th:field="*{dob}" id="dob" />
+                            <p class="error" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></p>
+                        </div>
+                    </div>
+                    <fieldset class="row mb-4">
+                        <div class="col-md-2"></div>
+                        <legend class="col-form-label col-md-2 pt-0">Gender</legend>
+                        <div class="col-md-4">
+                            <div class="form-check-inline">
+                                <input type="radio" class="form-check-input" th:field="*{gender}" value="male"
+                                    id="gender" />
+                                <label class="form-check-label" for="gender">Male</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type="radio" class="form-check-input" th:field="*{gender}" value="female"
+                                    id="gender" />
+                                <label class="form-check-label" for="gender">Female</label>
+                            </div>
+                            <p class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+                        </div>
+                    </fieldset>
+                    <div class="row mb-4">
+                        <div class="col-md-2"></div>
+                        <label for="phone" class="col-md-2 col-form-label">Phone</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" th:field="*{phone}" id="phone"
+                                placeholder="09-773278287" />
+                            <p class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+                        </div>
+                    </div>
+                   <div class="row mb-4">
+    <div class="col-md-2"></div>
+    <label for="education" class="col-md-2 col-form-label">Education</label>
+    <div class="col-md-4">
+        <select class="form-select" aria-label="Education" th:field="*{education}" id="education">
+            <option value="Bachelor of Information Technology">Bachelor of Information Technology</option>
+            <option value="Diploma in IT">Diploma in IT</option>
+            <option value="Bachelor of Computer Science">Bachelor of Computer Science</option>
+        </select>
+        <p class="error" th:if="${#fields.hasErrors('education')}" th:errors="*{education}"></p>
+    </div>
+</div>
+					 
+                    
+                    <div class="row mb-4">
+                    <div class="col-md-2"></div>
+                    <label for="courseId" class="col-md-2 col-form-label">Course</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-4">
+                        <th:block th:each="course : ${courseLists}">
+                            <input type="checkbox" class="form-check-input"
+                                   th:id="'course-' + ${course.name}" th:field="*{courseId}" th:value="${course.courseId}"/>
+                            <label class="form-check-label"
+                                   th:for="'course-' + ${course.courseId}" th:text="${course.name}"></label>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                        </th:block>
+                        <div th:if="${#fields.hasErrors('courseId')}" th:errors="*{courseId}" class="error"></div>
+                    </div>
+                </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                            <button type="submit" class="btn btn-secondary col-md-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Add</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Student Registration</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5 id="registerStatusMessage" th:text="${registrationResult}"></h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success col-md-2"
+                                                data-bs-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="footer :: footer"></div>
+
+
+    
+   
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Title</title>
+    <!-- Add your CSS and other head elements here -->
+</head>
+<body>
+<div th:fragment="sidebar">
+<div class="sidenav">
+
+    <button class="dropdown-btn"> Control Center <i class="fa fa-caret-down"></i></button>
+   
+
+    <div class="dropdown-container">
+     <th:block th:if="${session.ROLE == 'admin' and session.loggedin}">
+            
+       
+        <a th:href="@{/createCourse}">Course Registration </a>
+        <a th:href="@{/studentRegister}">Student Registration </a>
+        <a th:href="@{/userList}">Users Management</a>
+         </th:block>
+         
+        <a th:href="@{/courseList}">Courses </a>
+          <a th:href="@{/studentList}">Student Search </a>
+                 
+         
+    </div>
+    
+</div>
+</div>
+
+<!-- Add the rest of your HTML content here -->
+
+</body>
+</html>

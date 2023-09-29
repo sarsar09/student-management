@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <link th:href="@{/test.css}" rel="stylesheet" />
+
+    <title>Ace Inspiration</title>
+
+    <style>
+        .error {
+            color: #ff0000;
+        }
+
+        .alert {
+            width: 50%;
+            text-align: center;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="login-page-body">
+    <div class="login-page">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
+                    <h1>Welcome!</h1>
+                    <p>From Ace Inspiration</p>
+                </div>
+            </div>
+
+            <div style="color: red;" th:text="${error}"></div><br>
+
+            <form th:action="@{/loginProcess}" method="post" th:object="${bean}" class="login-form" name="confirm">
+                <input type="text" th:field="*{name}" placeholder="Enter your name" />
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></p>
+                <input type="password" th:field="*{password}" placeholder="password" />
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></p>
+                <button type="submit">login</button>
+                <p class="message">Not registered? <a th:href="@{/userRegister}">Create an account</a></p>
+                
+                <p ><a th:href="@{/password-request}">Forgot Password?</a></p>
+            </form>
+        </div>
+    </div>
+</body>
