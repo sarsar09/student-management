@@ -19,7 +19,7 @@ Welcome to the Student Management System in Java! This open-source project is de
 
 - **Frontend**: HTML, CSS, JavaScript, Thymeleaf.
 
-- **Backend**: Java, SpringBoot.
+- **Backend**: Java, SpringBoot,Spring Data JPA.
   
 - **Service**: Gmail SMTP server,Jasper Report.
 
